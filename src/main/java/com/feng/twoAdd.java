@@ -1,10 +1,8 @@
 package com.feng;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -207,23 +205,106 @@ public int maxProfit(int[] prices) {
         return res;
 }
 
+
+
+
+
+        //给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
+
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Object> set = new HashSet<>();
+        for (int i : nums){
+            set.add(i);
+        }
+        return set.size()<nums.length?true:false;
+    }
+
+    //输入：nums = [3,2,2,3], val = 3
+    //输出：2, nums = [2,2]
+    //思路：  遍历  把所非val的值过滤掉。
+    public int removeElement(int[] nums, int val) {
+        int k=0;
+        for (int i : nums){
+            if (i!=val){
+                nums[k++]=i;
+            }
+        }
+        return k;
+    }
+
     /**
+     * 136.给你一个 非空 整数数组 nums ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+     * 你必须设计并实现线性时间复杂度的算法来解决此问题，且该算法只使用常量额外空间。
+     * 输入：nums = [2,2,1]
+     * 输出：1
+     * @param nums
+     * @return
+     */
+
+    public int singleNumber(int[] nums) {
+        HashMap<Object, Object> map = new HashMap<>();
+
+    }
+
+    /**66. 加1 给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一
      * 输入：digits = [1,2,3]
      * 输出：[1,2,4]
      * @param digits
      * @return
+     * 思路：  判断是否为9  如果不为9加1 返回 如果为9 变为0   然后前一位加1
      */
     public int[] plusOne(int[] digits) {
-        int a = digits.length;
-        for (int i=a-1;i>0;i--){
-            digits[i]++;
-            digits[i]%=10;
-            if (digits[i]!=0)
+        for (int i =digits.length-1;i>=0;i--){
+            if (digits[i]!=9){
+                digits[i]++;
                 return digits;
             }
-            digits= new int[a+1];
-            digits[0]=1;
-            return digits;
+            digits[i]=0;
         }
+
+        digits= new int[digits.length + 1];
+        digits[0]=1;
+        return digits;
     }
+
+
+    /**
+     * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+     *
+     * 请必须使用时间复杂度为 O(log n) 的算法。
+     * 输入: nums = [1,3,5,6], target = 5
+     * 输出: 2
+     * 思路： 遍历数组，如果改数组的值大于或等于目标值就返回改数组下表，如果都没有 则 返回该数组的长度。
+     */
+
+    public int searchInsert(int[] nums, int target) {
+        for (int i = 0; i <= nums.length-1; i++) {
+            if (nums[i]>=target){
+                return i;
+            }
+        }
+        return nums.length;
+    }
+
+    /**
+     * 给你一个 非空 整数数组 nums ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+     *
+     * 你必须设计并实现线性时间复杂度的算法来解决此问题，且该算法只使用常量额外空间。
+     *
+     * 输入：nums = [2,2,1]
+     * 输出：1
+     *思路：创建一个集合，遍历数组，集合中没有遍历的元素就直接添加，如果有就把集合中元素删除 代码
+     */
+    public int singleNumber(int[] nums) {
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i =0 ; i<=nums.length-1; i++){
+            if (!list.contains(nums[i])){
+                list.add(nums[i]);
+            }else {
+                list.remove((Integer)nums[i]);
+            }
+        }
+        return list.get(0);
+    }
+}
 
