@@ -6,7 +6,10 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * 两数相加
+ * 规范：
+ * 先题号  在标签  题目 难易程度
+ * 例子
+ * 思路
  */
 public class twoAdd {
 
@@ -28,13 +31,14 @@ public class twoAdd {
     }
 
     public static void main(String[] args) {
-        System.out.println("134");
     }
 
     /**
-     * 两数之和
-     * 1  2   3
-     *
+     * 1. 数组 两数之和 简单
+     * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+     *输入：nums = [2,7,11,15], target = 9
+     * 输出：[0,1]
+     * 暴力求解
      * @param nums
      * @param target
      * @return
@@ -51,9 +55,9 @@ public class twoAdd {
     }
 
     /**
-     * 回文数
-     * 给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。
-     * 回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+     * 9. 字符串 回文数 简单
+     * 给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。 回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+     *
      * 123  321
      */
     public boolean isPalindrome(int x) {
@@ -68,11 +72,8 @@ public class twoAdd {
         }
     }
 
-
-
-
     /**
-     * 罗马转整数
+     * 13. 字符串 罗马转整数 简单
      * I             1
      * V             5
      * X             10
@@ -89,8 +90,8 @@ public class twoAdd {
      * C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
      * 先建立一个HashMap将I至M七个罗马符号及其对应的数字值存储下来，然后将字符串转换为int整数数组。初始化一个sum，
      * 从左向右遍历到倒数第二位，如果a[i]大于a[i+1]，则加上a[i]，否则减去a[i]。注意最后加上最后一位的a[s.length()-1]
-     * “II”
-     * I I
+     * 输入: s = "III"
+     * 输出: 3
      */
     public int romanToInt(String s) {
         HashMap<String, Integer> hashMap = new HashMap<>();
@@ -117,11 +118,9 @@ public class twoAdd {
         return sum;
     }
 
-
     /**
-     * 最长公共前缀
-     * 编写一个函数来查找字符串数组中的最长公共前缀。
-     * 如果不存在公共前缀，返回空字符串 ""。
+     * 14.字符串 最长公共前缀  简单
+     * 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 ""。
      * 输入：strs = ["flower","flow","flight"]
      * 输出："fl"
      */
@@ -144,11 +143,9 @@ public class twoAdd {
     }
 
     /**
-     * 有效的括号
+     * 20. 栈 有效的括号 简单
      * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
-     * <p>
      * 有效字符串需满足：
-     * <p>
      * 左括号必须用相同类型的右括号闭合。
      * 左括号必须以正确的顺序闭合。
      * 每个右括号都有一个对应的相同类型的左括号。
@@ -173,8 +170,10 @@ public class twoAdd {
     }
 
     /**
+     * 21. 链表 合并两个有序链表 简单
      * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
-     *
+     *输入：l1 = [1,2,4], l2 = [1,3,4]
+     * 输出：[1,1,2,3,4,4]
      * @param l1
      * @param l2
      * @return
@@ -195,33 +194,15 @@ public class twoAdd {
         }
     }
 
-public int maxProfit(int[] prices) {
-        int min =Integer.MAX_VALUE;
-        int res =0;
-        for (int i = 0;i<prices.length;i++){
-           min= Math.min(min,prices[i]);
-           res=Math.max(prices[i]-min,res);
-        }
-        return res;
-}
-
-
-
-
-
-        //给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
-
-    public boolean containsDuplicate(int[] nums) {
-        HashSet<Object> set = new HashSet<>();
-        for (int i : nums){
-            set.add(i);
-        }
-        return set.size()<nums.length?true:false;
-    }
-
-    //输入：nums = [3,2,2,3], val = 3
-    //输出：2, nums = [2,2]
-    //思路：  遍历  把所非val的值过滤掉。
+    /**
+     * 27.数组 移除元素 简单
+     *输入：nums = [3,2,2,3], val = 3
+     *输出：2, nums = [2,2]
+     * 思路：  遍历  把所非val的值过滤掉。
+     * @param nums
+     * @param val
+     * @return
+     */
     public int removeElement(int[] nums, int val) {
         int k=0;
         for (int i : nums){
@@ -232,7 +213,42 @@ public int maxProfit(int[] prices) {
         return k;
     }
 
-    /**66. 加1 给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一
+    /**
+     * 35. 数组 二分查找 搜索插入位置 简单
+     * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+     *
+     * 请必须使用时间复杂度为 O(log n) 的算法。
+     * 输入: nums = [1,3,5,6], target = 5
+     * 输出: 2
+     * 思路： 遍历数组，如果改数组的值大于或等于目标值就返回改数组下表，如果都没有 则 返回该数组的长度。
+     */
+    public int searchInsert(int[] nums, int target) {
+        for (int i = 0; i <= nums.length-1; i++) {
+            if (nums[i]>=target){
+                return i;
+            }
+        }
+        return nums.length;
+    }
+
+    /**
+     * 剑指offer63. 数组 股票的最大利润 中等
+     * @param prices
+     * @return
+     */
+    public int maxProfit(int[] prices) {
+        int min =Integer.MAX_VALUE;
+        int res =0;
+        for (int i = 0;i<prices.length;i++){
+           min= Math.min(min,prices[i]);
+           res=Math.max(prices[i]-min,res);
+        }
+        return res;
+}
+
+    /**
+     * 66.数组 加1 简单
+     *  给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一
      * 输入：digits = [1,2,3]
      * 输出：[1,2,4]
      * @param digits
@@ -253,26 +269,8 @@ public int maxProfit(int[] prices) {
         return digits;
     }
 
-
     /**
-     * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
-     *
-     * 请必须使用时间复杂度为 O(log n) 的算法。
-     * 输入: nums = [1,3,5,6], target = 5
-     * 输出: 2
-     * 思路： 遍历数组，如果改数组的值大于或等于目标值就返回改数组下表，如果都没有 则 返回该数组的长度。
-     */
-
-    public int searchInsert(int[] nums, int target) {
-        for (int i = 0; i <= nums.length-1; i++) {
-            if (nums[i]>=target){
-                return i;
-            }
-        }
-        return nums.length;
-    }
-
-    /**
+     * 136.数组 只出现一次的数字 简单
      * 给你一个 非空 整数数组 nums ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
      *
      * 你必须设计并实现线性时间复杂度的算法来解决此问题，且该算法只使用常量额外空间。
@@ -292,5 +290,23 @@ public int maxProfit(int[] prices) {
         }
         return list.get(0);
     }
+
+    /**
+     *217.数组 存在重复数组 简单
+     * 给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
+     * @param nums
+     * @return
+     */
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Object> set = new HashSet<>();
+        for (int i : nums){
+            set.add(i);
+        }
+        return set.size()<nums.length?true:false;
+    }
+
+
+
+
 }
 
