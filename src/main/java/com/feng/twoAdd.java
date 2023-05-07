@@ -14,6 +14,26 @@ import java.util.stream.IntStream;
  */
 public class twoAdd {
 
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
     public class ListNode {
         int val;
         ListNode next;
@@ -45,15 +65,22 @@ public class twoAdd {
      * @param target
      * @return
      */
-    public int[] twoSum1(int[] nums, int target) {
-        for (int i = 0; i < nums.length - 1; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target) {
-                    return new int[]{i, j};
-                }
-            }
+    public int[] twoSum(int[] nums, int target) {
+        int[] res = new int[2];
+        if (nums == null || nums.length == 0) {
+            return res;
         }
-        throw new IllegalArgumentException();
+        int temp = 0;
+        HashMap<Object, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            temp = target - nums[i];
+            if (map.containsKey(temp)) {
+                res[0] = i;
+                res[1] = map.get(temp);
+            }
+            map.put(nums[i], i);
+        }
+        return res;
     }
 
     /**
@@ -296,6 +323,21 @@ public class twoAdd {
     }
 
     /**
+     * 88 题第二中解法  优化
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public void merge1(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = 0; i < nums2.length; i++) {
+            nums1[m++] = nums2[i];
+        }
+        Arrays.sort(nums1);
+    }
+
+    /**
      * 121. 数组 股票的最大利润 简单
      *
      * @param prices
@@ -444,13 +486,33 @@ public class twoAdd {
         Arrays.sort(g);
         Arrays.sort(s);
         while (child < g.length && cookie < s.length) {
-            if (g[child]<=s[cookie]){
+            if (g[child] <= s[cookie]) {
                 child++;
             }
-                cookie++;
+            cookie++;
         }
         return child;
     }
 
-
+    /**
+     * 100 树 相同的树 简单
+     * 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
+     *
+     * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
+     *
+     *
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p==null && q==null){
+            return true;
+        }
+        if (p!=null && q!=null && p.val==q.val ){
+            return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+        }else {
+            return false;
+        }
+    }
 }
