@@ -338,6 +338,28 @@ public class twoAdd {
     }
 
     /**
+     * 100 树 相同的树 简单
+     * 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
+     *
+     * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
+     *
+     *
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p==null && q==null){
+            return true;
+        }
+        if (p!=null && q!=null && p.val==q.val ){
+            return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+        }else {
+            return false;
+        }
+    }
+
+    /**
      * 121. 数组 股票的最大利润 简单
      *
      * @param prices
@@ -495,24 +517,24 @@ public class twoAdd {
     }
 
     /**
-     * 100 树 相同的树 简单
-     * 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
-     *
-     * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
-     *
-     *
-     * @param p
-     * @param q
+     * 94.树 94. 二叉树的中序遍历 简单
+     * 给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
+     * @param root
      * @return
      */
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        if (p==null && q==null){
-            return true;
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        while (root!=null|| !stack.isEmpty()){
+            while (root!=null){
+                stack.push(root);
+                root=root.left;
+            }
+            root = stack.pop();
+            list.add(root.val);
+            root=root.right;
         }
-        if (p!=null && q!=null && p.val==q.val ){
-            return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
-        }else {
-            return false;
-        }
+
+        return list;
     }
 }
