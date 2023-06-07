@@ -14,7 +14,6 @@ import java.util.stream.IntStream;
  */
 public class twoAdd {
 
-
     public class TreeNode {
         int val;
         TreeNode left;
@@ -56,7 +55,7 @@ public class twoAdd {
 
     /**
      * 1. 数组 两数之和 简单
-     * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+     * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target的那两个整数，并返回它们的数组下标。
      * 输入：nums = [2,7,11,15], target = 9
      * 输出：[0,1]
      * 暴力求解
@@ -171,6 +170,28 @@ public class twoAdd {
         return strs[0];
     }
 
+
+    /**
+     * 14.字符串 最长公共前缀  简单  第二种解法
+     * 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 ""。
+     * 输入：strs = ["flower","flow","flight"]
+     * 输出："fl"
+     */
+        public String longestCommonPrefix1(String[] strs) {
+            String s = strs[0];
+
+            for ( String str: strs){
+                while (!str.startsWith(s)){
+                    if (s.length()==0){
+                        return "";
+                    }else {
+                        s= s.substring(0,s.length()-1);
+                    }
+                }
+            }
+            return s;
+        }
+
     /**
      * 20. 栈 有效的括号 简单
      * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
@@ -230,13 +251,16 @@ public class twoAdd {
      * 使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。然后返回 nums 中唯一元素的个数。
      * 输入：nums = [1,1,2]
      * 输出：2, nums = [1,2,_]
+     * 思路：  通过索引进行移动操作，
      */
     public int removeDuplicates(int[] nums) {
-        HashSet<Object> set = new HashSet<>();
-        for (int i = 0; i < nums.length - 1; i++) {
-            set.add(i);
+        int index = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] != nums[i]) {
+                nums[++index] = nums[i];
+            }
         }
-        return set.size();
+        return index + 1;
     }
 
     /**
@@ -276,7 +300,6 @@ public class twoAdd {
         }
         return nums.length;
     }
-
 
     /**
      * 66.数组 加1 简单
