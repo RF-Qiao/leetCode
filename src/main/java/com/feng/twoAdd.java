@@ -361,11 +361,32 @@ public class twoAdd {
     }
 
     /**
+     * 94.树 94. 二叉树的中序遍历 简单
+     * 给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            list.add(root.val);
+            root = root.right;
+        }
+        return list;
+    }
+
+    /**
      * 100 树 相同的树 简单
      * 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
      *
      * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
-     *
      *
      * @param p
      * @param q
@@ -540,24 +561,33 @@ public class twoAdd {
     }
 
     /**
-     * 94.树 94. 二叉树的中序遍历 简单
-     * 给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
+     * 70.递归  爬楼梯 简单
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * <p>
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs(int n) {
+        if (n <= 2) {
+            return n;
+        } else {
+            return climbStairs(n - 1) + climbStairs(n - 2);
+        }
+    }
+
+    /**
+     * 104.递归 二叉树最大深度  简单
+     * 给定一个二叉树，找出其最大深度。
+     *
+     * 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+     *
+     * 说明: 叶子节点是指没有子节点的节点。
      * @param root
      * @return
      */
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        while (root!=null|| !stack.isEmpty()){
-            while (root!=null){
-                stack.push(root);
-                root=root.left;
-            }
-            root = stack.pop();
-            list.add(root.val);
-            root=root.right;
-        }
-
-        return list;
+    public int maxDepth(TreeNode root) {
+        return root==null?0:Math.max(maxDepth(root.left),maxDepth(root.right))+1;
     }
 }
