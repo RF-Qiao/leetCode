@@ -177,20 +177,19 @@ public class twoAdd {
      * 输入：strs = ["flower","flow","flight"]
      * 输出："fl"
      */
-        public String longestCommonPrefix1(String[] strs) {
-            String s = strs[0];
-
-            for ( String str: strs){
-                while (!str.startsWith(s)){
-                    if (s.length()==0){
-                        return "";
-                    }else {
-                        s= s.substring(0,s.length()-1);
-                    }
+    public String longestCommonPrefix1(String[] strs) {
+        String s = strs[0];
+        for (String str : strs) {
+            while (!str.startsWith(s)) {
+                if (s.length() == 0) {
+                    return "";
+                } else {
+                    s = s.substring(0, s.length() - 1);
                 }
             }
-            return s;
         }
+        return s;
+    }
 
     /**
      * 20. 栈 有效的括号 简单
@@ -325,6 +324,23 @@ public class twoAdd {
     }
 
     /**
+     * 70.递归  爬楼梯 简单
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * <p>
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs(int n) {
+        if (n <= 2) {
+            return n;
+        } else {
+            return climbStairs(n - 1) + climbStairs(n - 2);
+        }
+    }
+
+    /**
      * 88.数组 合并两个有序数组 简单
      * 给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
      * 输入：nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
@@ -385,7 +401,7 @@ public class twoAdd {
     /**
      * 100 树 相同的树 简单
      * 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。
-     *
+     * <p>
      * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
      *
      * @param p
@@ -393,12 +409,12 @@ public class twoAdd {
      * @return
      */
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        if (p==null && q==null){
+        if (p == null && q == null) {
             return true;
         }
-        if (p!=null && q!=null && p.val==q.val ){
-            return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
-        }else {
+        if (p != null && q != null && p.val == q.val) {
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        } else {
             return false;
         }
     }
@@ -561,33 +577,79 @@ public class twoAdd {
     }
 
     /**
-     * 70.递归  爬楼梯 简单
-     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
-     * <p>
-     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
-     *
-     * @param n
-     * @return
-     */
-    public int climbStairs(int n) {
-        if (n <= 2) {
-            return n;
-        } else {
-            return climbStairs(n - 1) + climbStairs(n - 2);
-        }
-    }
-
-    /**
      * 104.递归 二叉树最大深度  简单
      * 给定一个二叉树，找出其最大深度。
-     *
+     * <p>
      * 二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
-     *
+     * <p>
      * 说明: 叶子节点是指没有子节点的节点。
+     *
      * @param root
      * @return
      */
     public int maxDepth(TreeNode root) {
-        return root==null?0:Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+        return root == null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+    }
+
+    /**
+     * 101. 对称二叉树 树 简单
+     * 给你一个二叉树的根节点root，检查它是否轴对称。
+     *
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        return check(root, root);
+    }
+
+    public boolean check(TreeNode l, TreeNode r) {
+        if (l == null && r == null) {
+            return true;
+        }
+        if (l == null || r == null) {
+            return false;
+        }
+        return l.val == r.val && check(l.left, r.right) && check(l.right, r.left);
+    }
+
+    /**
+     * 141. 环形链表 简单
+     * 给你一个链表的头节点 head ，判断链表中是否有环。
+     * 如果链表中存在环 ，则返回 true 。 否则，返回 false
+     * 思路： 通过遍历所有的元素，放入hashset中，若出现相同的元素，不能添加此元素  则返回true  否则返回false。
+     *
+     * @param head
+     * @return
+     */
+    public boolean hasCycle(ListNode head) {
+        Set<ListNode> objects = new HashSet<>();
+        while (head != null) {
+            if (!objects.add(head)) {
+                return true;
+            }
+            head = head.next;
+        }
+
+        return false;
+    }
+
+    /**
+     * 160. 相交链表 简单
+     * 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
+     * 双指针实现！
+     * 思路：pa pb 指向headA 和 headB 两个列表。指针从a列表走，若下一个为空，则指针只想B。B也如此，若下一个为空，则指针指向A。然后相同是返回A。
+     *
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        //判断不相交 返回null
+        ListNode PA = headA, PB = headB;
+        while (PA != PB) {
+            PA = PA == null ? headB : PA.next;
+            PB = PB == null ? headA : PB.next;
+        }
+        return PA;
     }
 }
